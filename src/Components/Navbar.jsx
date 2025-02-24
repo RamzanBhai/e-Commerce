@@ -28,9 +28,6 @@ const Navbar = () => {
             )
           }
           </Link>
-          <button className='block md:hidden'>
-            <FaUser/>
-          </button>
         </div>
       </div>
       <div className='flex items-center justify-center space-x-10 py-4 text-sm font-bold'>
