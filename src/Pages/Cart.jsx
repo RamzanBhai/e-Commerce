@@ -6,11 +6,18 @@ import { decreaseQuantity, increaseQuantity, removeFromCart } from "../Redux/Car
 import Modal from "../Components/Modal";
 import ChangeAddress from "../Components/ChangeAddress";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 const Cart = () => {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart);
   const [address,setAddress]=useState('Main street , 0012')
   const [ModalOpen,setModal]=useState(false)
+  const [productToRemove,setProductToRemove]=useState(null)
+  const confirmRemove = () => {
+    dispatch(removeFromCart(productToRemove.id))
+    toast.success(`${productToRemove.name} removed from cart`)
+    setProductToRemove(null)
+  }
   return (
     <div className="container mx-auto py-8 min-h-96 px-4 md:px-16 lg:px-24">
       {cart.products.length > 0 ? (
@@ -53,7 +60,7 @@ const Cart = () => {
                       <button onClick={()=>dispatch(increaseQuantity(product.id))} className="text-xl px-1 border-l">+</button>
                     </div>
                     <p>${(product.quantity * product.price).toFixed(2)}</p>
-                    <button onClick={() =>dispatch(removeFromCart(product.id),alert(`${product.name} remove from Cart`))} className="text-red-500 hover:text-red-700">
+                    <button onClick={() => setProductToRemove(product)} className="text-red-500 hover:text-red-700" aria-label={`Remove ${product.name} from cart`}>
                       <FaTrashAlt />
                     </button>
                   </div>
@@ -85,6 +92,28 @@ const Cart = () => {
           </div>
           <Modal ModalOpen={ModalOpen} setModal={setModal}>
             <ChangeAddress setAddress={setAddress}  setModal={setModal}/>
+          </Modal>
+          <Modal ModalOpen={Boolean(productToRemove)} setModal={() => setProductToRemove(null)}>
+            <h3 className="text-xl font-semibold mb-3">Remove item?</h3>
+            <p className="text-gray-600 mb-6">
+              Are you sure you want to remove {productToRemove?.name} from your cart?
+            </p>
+            <div className="flex justify-end gap-3">
+              <button
+                type="button"
+                onClick={() => setProductToRemove(null)}
+                className="bg-gray-200 text-gray-800 py-2 px-4 rounded hover:bg-gray-300"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={confirmRemove}
+                className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700"
+              >
+                Remove
+              </button>
+            </div>
           </Modal>
         </div>
       ) : (

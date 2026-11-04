@@ -2,6 +2,7 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 import { addToCart } from "../Redux/CartSlice";
 import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
 const ProductCard = ({product}) => {
   const dispatch=useDispatch();
@@ -9,7 +10,7 @@ const ProductCard = ({product}) => {
     e.stopPropagation();
     e.preventDefault();
     dispatch(addToCart(product))
-    alert(`${product.name} Added to Cart`)
+    toast.success(`${product.name} added to cart`)
   }
   return (
     <div className="bg-white p-4 shadow rounded  relative transform transition-transform duration-300 hover:scale-105">

@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { FaLaptopHouse } from 'react-icons/fa'
+import toast from 'react-hot-toast'
 
 const ChangeAddress = ({setAddress,setModal}) => {
   const [newAddress,setNewAddress]=useState("")
   const onClose=()=>{
     setAddress(newAddress);
     setModal(false)
+    toast.success("Address updated successfully")
   }
   return (
     <div>

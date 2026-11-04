@@ -1,14 +1,14 @@
-import React from 'react'
-import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa'
+import { FaMoon, FaSearch, FaShoppingCart, FaSun } from 'react-icons/fa'
+import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { setSearch } from '../Redux/searchSlice'
 
-const Navbar = () => {
+const Navbar = ({ isDark, onToggleTheme }) => {
   const products = useSelector(state => state.cart.products)
   const dispatch=useDispatch();
   return (
-    <nav className='bg=white shadow-md'>
+    <nav className='bg-white shadow-md'>
       <div className='container mx-auto px-4 md:px-16 lg:px-24 py-4 flex justify-between items-center'>
         <div className='text-lg font-bold'>
           <Link to='/'>e-Shop</Link>
@@ -20,6 +20,15 @@ const Navbar = () => {
           </form>
         </div>
         <div className='flex items-center space-x-4'>
+          <button
+            type="button"
+            onClick={onToggleTheme}
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+            aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
+            title={`Switch to ${isDark ? 'light' : 'dark'} theme`}
+          >
+            {isDark ? <FaSun className="text-yellow-400" /> : <FaMoon />}
+          </button>
           <Link to='/cart' className='relative'>
           <FaShoppingCart className='text-5xl pl-6'/>
           {
@@ -41,3 +50,8 @@ const Navbar = () => {
 }
 
 export default Navbar
+
+Navbar.propTypes = {
+  isDark: PropTypes.bool.isRequired,
+  onToggleTheme: PropTypes.func.isRequired,
+}
