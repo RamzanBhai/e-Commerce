@@ -1,11 +1,10 @@
-import React from "react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-8 px-4 md:px-16 lg:px-24">
-      <div className=" container mx-auto grid grid-cols-1  md:grid-cols-3 gap-8">
+    <footer className="bg-gray-800 px-4 py-8 text-white sm:px-6 md:px-16 lg:px-24">
+      <div className="container mx-auto grid grid-cols-1 gap-8 md:grid-cols-3">
         <div>
           <h3 className="text-xl font-semibold">e-Shop</h3>
           <p className="mt-4">
@@ -54,16 +53,16 @@ const Footer = () => {
               <FaLinkedin />
             </a>
           </div>
-          <form className="flex items-center  mt-8">
-            <input type="email" placeholder="Enter a email" className="w-ful p-2 rounded-l-lg bg-gray-800 border border-gray-600"/>
-            <button className="bg-red-600  text-white px-4 py-2  rounded-r-lg border border-gray-600">Subscribe</button>
+          <form className="mt-8 flex w-full max-w-md flex-col items-stretch sm:flex-row">
+            <input type="email" placeholder="Enter an email" className="min-w-0 flex-1 rounded-t-lg border border-gray-600 bg-gray-800 p-2 sm:rounded-l-lg sm:rounded-r-none"/>
+            <button className="rounded-b-lg border border-gray-600 bg-red-600 px-4 py-2 text-white sm:rounded-r-lg sm:rounded-l-none">Subscribe</button>
           </form>
         </div>
       </div>
       <div className="mt-8 border-t border-gray-700 pt-4 ">
-        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-          <p>&copy; 2024 e-Shop All right reserved</p>
-          <div className="flex space-x-4 mt-4 md:mt-0">
+        <div className="container mx-auto flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
+          <p>&copy; 2026 e-Shop All rights reserved</p>
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 md:justify-end">
             <a href="" className="hover:underline">Privacy policy</a>
             <a href="" className="hover:underline">Terms & Conditions</a>
           </div>

@@ -6,40 +6,45 @@ import { setSearch } from '../Redux/searchSlice'
 
 const Navbar = ({ isDark, onToggleTheme }) => {
   const products = useSelector(state => state.cart.products)
-  const dispatch=useDispatch();
+  const dispatch = useDispatch()
   return (
     <nav className='bg-white shadow-md'>
-      <div className='container mx-auto px-4 md:px-16 lg:px-24 py-4 flex justify-between items-center'>
-        <div className='text-lg font-bold'>
+      <div className='container mx-auto flex flex-wrap items-center gap-x-4 gap-y-3 px-4 py-4 md:flex-nowrap md:px-16 lg:px-24'>
+        <div className='shrink-0 text-lg font-bold'>
           <Link to='/'>e-Shop</Link>
         </div>
-        <div className='relative flex-1 mx-4'>
-          <form >
-            <input type="text" placeholder='Search Product' onChange={(e)=>dispatch(setSearch(e.target.value))}  className='w-full px-5 py-4'/>
-            <FaSearch className='absolute top-6 right-3 text-red-500'/>
+        <div className='order-3 w-full md:order-none md:mx-4 md:flex-1'>
+          <form className='relative'>
+            <input
+              type='text'
+              placeholder='Search Product'
+              onChange={e => dispatch(setSearch(e.target.value))}
+              className='w-full px-5 py-3 pr-10'
+            />
+            <FaSearch className='pointer-events-none absolute inset-y-0 right-3 my-auto text-red-500' />
           </form>
         </div>
-        <div className='flex items-center space-x-4'>
+        <div className='order-2 ml-auto flex shrink-0 items-center gap-2 sm:gap-4 md:order-none'>
           <button
-            type="button"
+            type='button'
             onClick={onToggleTheme}
-            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+            className='rounded-full p-2 dark:hover:bg-gray-700'
             aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
             title={`Switch to ${isDark ? 'light' : 'dark'} theme`}
           >
-            {isDark ? <FaSun className="text-yellow-400" /> : <FaMoon />}
+            {isDark ? <FaSun /> : <FaMoon />}
           </button>
           <Link to='/cart' className='relative'>
-          <FaShoppingCart className='text-5xl pl-6'/>
-          {
-           products.length>0 &&(
-              <span className='absolute top-0 text-xs w-3 h-3 left-3  bg-red-600 rounded-full flex justify-center items-center text-white '>{products.length}</span>
-            )
-          }
+            <FaShoppingCart className='text-xl' />
+            {products.length > 0 && (
+              <span className='absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-600 px-1 text-xs text-white'>
+                {products.length}
+              </span>
+            )}
           </Link>
         </div>
       </div>
-      <div className='flex items-center justify-center space-x-10 py-4 text-sm font-bold'>
+      <div className='flex flex-wrap items-center justify-center gap-x-6 gap-y-2 px-4 py-4 text-sm font-bold sm:gap-x-10'>
         <Link to='/' className='hover:underline'>Home</Link>
         <Link to='/shop' className='hover:underline'>Shop</Link>
         <Link to='/contact' className='hover:underline'>Contact</Link>

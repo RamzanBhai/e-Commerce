@@ -1,16 +1,24 @@
-import React from 'react'
+import PropTypes from 'prop-types'
 
-const Modal = ({ModalOpen,setModal,children}) => {
-  if(!ModalOpen) return null;
+const Modal = ({ ModalOpen, children }) => {
+  if (!ModalOpen) return null
+
   return (
-    <div className='fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50'>
-      <div className='bg-white rounded-lg shadow-lg p-6 w-full max-w-md ' >
-        <button onClick={()=>setModal(false)} className='absolute top-4 right-4 text-gray-300 text-3xl'>&times;</button>
+    <div className='fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75'>
+      <div
+        role='dialog'
+        aria-modal='true'
+        className='relative w-full max-w-md rounded-lg bg-white p-6 shadow-lg'
+      >
         {children}
-        
       </div>
     </div>
   )
+}
+
+Modal.propTypes = {
+  ModalOpen: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
 }
 
 export default Modal

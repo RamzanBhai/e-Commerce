@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import emptyCart from "../assets/Images/emptycart.png";
 import { FaTrashAlt } from "react-icons/fa";
@@ -19,14 +19,13 @@ const Cart = () => {
     setProductToRemove(null)
   }
   return (
-    <div className="container mx-auto py-8 min-h-96 px-4 md:px-16 lg:px-24">
+    <div className="container mx-auto min-h-96 px-4 py-8 sm:px-6 md:px-16 lg:px-24">
       {cart.products.length > 0 ? (
         <div>
           <h3 className="text-2xl font-semibold mb-4 ">SHOPPING CART</h3>
-          <div className="flex flex-col  md:flex-row justify-between space-x-10 mt-8"> 
-            <div className="h-[270px] overflow-y-auto w-full">
-            <div className="md:w-2/3">
-              <div className="flex justify-between border-b items-center mb-4 text-xs font-bold ">
+          <div className="mt-8 flex flex-col gap-6 md:flex-row md:items-start">
+            <div className="min-w-0 w-full md:w-2/3">
+              <div className="mb-4 hidden items-center justify-between border-b text-xs font-bold sm:flex">
                 <p>PRODUCTS</p>
                 <div className="flex space-x-8">
                   <p>PRICE</p>
@@ -38,19 +37,19 @@ const Cart = () => {
               {cart.products.map((product) => (
                 <div
                   key={product.id}
-                  className="flex items-center  justify-between p-3 border-b "
+                  className="flex flex-wrap items-center justify-between gap-3 border-b p-3"
                 >
-                  <div className="md:flex items-center space-x-4 ">
+                  <div className="flex min-w-0 items-center gap-4">
                     <img
                       src={product.image}
                       alt=""
-                      className="w-16 h-16 object-contian rounded "
+                      className="h-16 w-16 shrink-0 rounded object-contain"
                     />
-                    <div className="flex-1 ml-4 ">
-                      <h3 className="text-lg font-semibold">{product.name}</h3>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="truncate text-lg font-semibold">{product.name}</h3>
                     </div>
                   </div>
-                  <div className="flex space-x-12 items-center">
+                  <div className="flex w-full items-center justify-between gap-3 text-sm sm:w-auto sm:gap-6">
                     <p>${product.price}</p>
                     <div className="flex items-center justify-center border ">
                       <button onClick={()=>dispatch(decreaseQuantity(product.id))} className="text-xl font-bold px-1.5 border-r ">
@@ -67,9 +66,8 @@ const Cart = () => {
                 </div>
               ))}
             </div>
-            </div>
 
-            <div className="md:w-1/3 bg-white p-6 h-fit  rounded-lg shadow-md border">
+            <div className="h-fit w-full rounded-lg border bg-white p-5 shadow-md sm:p-6 md:w-1/3">
               <h3 className="text-sm font-semibold mb-5">CART TOTALS</h3>
               <div className="flex justify-between mb-5 border-b pb-1">
                 <span className="text-sm">Total items : </span>
