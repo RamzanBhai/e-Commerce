@@ -34,37 +34,45 @@ const Cart = () => {
                   <p>REMOVE</p>
                 </div>
               </div>
-              {cart.products.map((product) => (
-                <div
-                  key={product.id}
-                  className="flex flex-wrap items-center justify-between gap-3 border-b p-3"
-                >
-                  <div className="flex min-w-0 items-center gap-4">
-                    <img
-                      src={product.image}
-                      alt=""
-                      className="h-16 w-16 shrink-0 rounded object-contain"
-                    />
-                    <div className="min-w-0 flex-1">
-                      <h3 className="truncate text-lg font-semibold">{product.name}</h3>
+              <div
+                className={
+                  cart.products.length > 3
+                    ? "max-h-[310px] overflow-y-auto pr-2"
+                    : ""
+                }
+              >
+                {cart.products.map((product) => (
+                  <div
+                    key={product.id}
+                    className="flex flex-wrap items-center justify-between gap-3 border-b p-3"
+                  >
+                    <div className="flex min-w-0 items-center gap-4">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="h-16 w-16 shrink-0 rounded object-contain"
+                      />
+                      <div className="min-w-0 flex-1">
+                        <h3 className="truncate text-lg font-semibold">{product.name}</h3>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex w-full items-center justify-between gap-3 text-sm sm:w-auto sm:gap-6">
-                    <p>${product.price}</p>
-                    <div className="flex items-center justify-center border ">
-                      <button onClick={()=>dispatch(decreaseQuantity(product.id))} className="text-xl font-bold px-1.5 border-r ">
-                        -
+                    <div className="flex w-full items-center justify-between gap-3 text-sm sm:w-auto sm:gap-6">
+                      <p>${product.price}</p>
+                      <div className="flex items-center justify-center border ">
+                        <button onClick={()=>dispatch(decreaseQuantity(product.id))} className="text-xl font-bold px-1.5 border-r ">
+                          -
+                        </button>
+                        <p className="text-xl px-2 ">{product.quantity}</p>
+                        <button onClick={()=>dispatch(increaseQuantity(product.id))} className="text-xl px-1 border-l">+</button>
+                      </div>
+                      <p>${(product.quantity * product.price).toFixed(2)}</p>
+                      <button onClick={() => setProductToRemove(product)} className="text-red-500 hover:text-red-700" aria-label={`Remove ${product.name} from cart`}>
+                        <FaTrashAlt />
                       </button>
-                      <p className="text-xl px-2 ">{product.quantity}</p>
-                      <button onClick={()=>dispatch(increaseQuantity(product.id))} className="text-xl px-1 border-l">+</button>
                     </div>
-                    <p>${(product.quantity * product.price).toFixed(2)}</p>
-                    <button onClick={() => setProductToRemove(product)} className="text-red-500 hover:text-red-700" aria-label={`Remove ${product.name} from cart`}>
-                      <FaTrashAlt />
-                    </button>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
             <div className="h-fit w-full rounded-lg border bg-white p-5 shadow-md sm:p-6 md:w-1/3">

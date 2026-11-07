@@ -47,8 +47,8 @@ const Navbar = ({ isDark, onToggleTheme }) => {
       <div className='flex flex-wrap items-center justify-center gap-x-6 gap-y-2 px-4 py-4 text-sm font-bold sm:gap-x-10'>
         <Link to='/' className='hover:underline'>Home</Link>
         <Link to='/shop' className='hover:underline'>Shop</Link>
-        <Link to='/contact' className='hover:underline'>Contact</Link>
         <Link to='/about' className='hover:underline'>About</Link>
+        <Link to='/contact' className='hover:underline'>Contact</Link>
       </div>
     </nav>
   )

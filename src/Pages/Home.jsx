@@ -3,6 +3,8 @@ import HeroImages from "../assets/Images/hero-page.png";
 import InfoSection from "../Components/InfoSection";
 import CategorySection from "../Components/CategorySection";
 import ProductCard from "../Components/ProductCard";
+import { About } from "../Components/About";
+import { Contact } from "../Components/Contact";
 import Shop from "./Shop";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -68,6 +70,8 @@ const Home = () => {
         </div>
       </div>
       <Shop />
+      <About />
+      <Contact />
     </div>
   );
 };
